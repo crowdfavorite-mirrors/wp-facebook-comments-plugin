@@ -79,9 +79,11 @@ if (!isset($options['count'])) {$options['count'] = "off";}
     $content .= "<fb:comments href=\"".get_permalink()."\" num_posts=\"".$options['num']."\" width=\"".$options['width']."\" colorscheme=\"".$options['scheme']."\"></fb:comments>";
      }
 
-    if ($options['linklove'] != 'no' ||$options['linklove'] != 'off' || empty($fbcomments[linklove])) {
+    if ($options['linklove'] != 'no') {
+        if ($options['linklove'] != 'off') {
+            if (empty($fbcomments[linklove])) {
       $content .= '<p>Powered by <a href="http://3doordigital.com/wordpress/plugins/facebook-comments/">Facebook Comments</a></p>';
-    }
+    }}}
   }
 return $content;
 }
@@ -122,9 +124,9 @@ function fbcommentshortcode($fbatts) {
     $fbcommentbox .= "<fb:comments href=\"".$url."\" num_posts=\"".$fbcomments[num]."\" width=\"".$fbcomments[width]."\" colorscheme=\"".$fbcomments[scheme]."\"></fb:comments>";
      }
 
-    if ($options['linklove'] != 'no' ||$options['linklove'] != 'off' || empty($fbcomments[linklove])) {
+	if (!empty($fbcomments[linklove])) {
       $fbcommentbox .= '<p>Powered by <a href="http://3doordigital.com/wordpress/plugins/facebook-comments/">Facebook Comments</a></p>';
-    }
+	}
   return $fbcommentbox;
 }
 add_filter('widget_text', 'do_shortcode');
